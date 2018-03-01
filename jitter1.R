@@ -18,23 +18,23 @@ mydat<-mydatafiltered[mydatafiltered$DeviceType == "Phone",]
 getavgWest<-function(x,sdata){
   y<-nrow(sdata)*(x/100)
   print(y)
-  y<-round(y, digits = 0)
+  y<-round(y, digits = 3)
   
   newdata<-sdata[1:y,]
   sumnewdata<-sum(newdata$wUDPJit1)
   print(sumnewdata)
   avgNewData<-sumnewdata/y
-  avgNewData<-round(avgNewData, digits = 0)
+  avgNewData<-round(avgNewData, digits = 3)
   return(avgNewData)
 }
 getavgEast<-function(x,sdata){
   y<-nrow(sdata)*(x/100)
-  y<-round(y, digits = 0)
+  y<-round(y, digits = 3)
   
   newdata<-sdata[1:y,]
   sumnewdata<-sum(newdata$eUDPJit1)
   avgNewData<-sumnewdata/y
-  avgNewData<-round(avgNewData, digits = 0)
+  avgNewData<-round(avgNewData, digits = 3)
   return(avgNewData)
 }
 
@@ -193,7 +193,7 @@ dfeast <- data.frame(Carrier=rep(c("Verizon", "AT&T","T-Mobile","Sprint"), each=
 # x axis treated as continuous variable
 # dfwest$Percentage <- as.numeric(as.vector(dfwest$Percentage))
 # 
-# ggplot(data=dfwest, aes(x=Percentage, y=AvgRtt, fill=Carrier)) +
+# ggplot(data=dfwest, aes(x=Percentage, y=AvgUDPJitter, fill=Carrier)) +
 #   geom_bar(stat="identity", position=position_dodge())+
 #   scale_fill_brewer(palette="Paired")+
 #   ggtitle("West Phone") +
