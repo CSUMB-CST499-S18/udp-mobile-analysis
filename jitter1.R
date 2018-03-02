@@ -1,5 +1,5 @@
 library(ggplot2)
-mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/master/Cumulative_Round10_Results_Final.csv")
+mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/master/Cumulative_Round12_Results_Final.csv")
 mydatafiltered = mydata[c(1:8, 12, 30:53)]
 View(mydatafiltered)
 #Convert the errors to INF
@@ -161,8 +161,8 @@ ggplot(west, aes(percent)) +
   geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
   geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
   scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-  scale_y_continuous(name="West Average UDP Jitter 1 (Milliseconds)") +
-  ggtitle("West Phone UDP Jitter 1 (Round 10)")
+  scale_y_continuous(name="West Average UDP Jitter 1 (Milliseconds)", limits=c(0,15)) +
+  ggtitle("West Phone UDP Jitter 1 (Round 12)")
 # geom_line(linetype = "dashed") + 
 # geom_point()
 ggplot(east, aes(percent)) + 
@@ -172,7 +172,7 @@ ggplot(east, aes(percent)) +
   geom_line(aes(y = ssE, colour = "Sprint"), linetype = "solid", size = .70) +
   scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
   scale_y_continuous(name="East Average UDP Jitter 1 (Milliseconds)") +
-  ggtitle("East Phone UDP Jitter 1 (Round 10)")
+  ggtitle("East Phone UDP Jitter 1 (Round 12)")
 
 
 
