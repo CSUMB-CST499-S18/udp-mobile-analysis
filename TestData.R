@@ -24,7 +24,7 @@ getavgWest<-function(x,sdata){
   sumnewdata<-sum(newdata$wUDPJit1)
   print(sumnewdata)
   avgNewData<-sumnewdata/y
-  avgNewData<-round(avgNewData, digits = 0)
+  #avgNewData<-round(avgNewData, digits = 0)
   return(avgNewData)
 }
 getavgEast<-function(x,sdata){
@@ -34,7 +34,7 @@ getavgEast<-function(x,sdata){
   newdata<-sdata[1:y,]
   sumnewdata<-sum(newdata$eUDPJit1)
   avgNewData<-sumnewdata/y
-  avgNewData<-round(avgNewData, digits = 0)
+ # avgNewData<-round(avgNewData, digits = 0)
   return(avgNewData)
 }
 
