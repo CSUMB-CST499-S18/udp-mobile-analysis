@@ -3,15 +3,15 @@ mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile
 mydatafiltered = mydata[c(1:8, 12, 30:53)]
 View(mydatafiltered)
 #Convert the errors to INF
-mydatafiltered$wUDPJit1 = as.character(mydatafiltered$wUDPJit1)
-mydatafiltered$eUDPJit1 = as.character(mydatafiltered$eUDPJit1)
-mydatafiltered$wUDPJit1 <- gsub("^[a-z].*", "Inf", mydatafiltered$wUDPJit1)
-mydatafiltered$eUDPJit1 <- gsub("^[a-z].*", "Inf", mydatafiltered$eUDPJit1)
+mydatafiltered$wUDPJit3 = as.character(mydatafiltered$wUDPJit3)
+mydatafiltered$eUDPJit3 = as.character(mydatafiltered$eUDPJit3)
+mydatafiltered$wUDPJit3 <- gsub("^[a-z].*", "Inf", mydatafiltered$wUDPJit3)
+mydatafiltered$eUDPJit3 <- gsub("^[a-z].*", "Inf", mydatafiltered$eUDPJit3)
 
 
 #convert char to numeric 
-mydatafiltered$wUDPJit1 <- as.numeric(as.character(mydatafiltered$wUDPJit1))
-mydatafiltered$eUDPJit1 <- as.numeric(as.character(mydatafiltered$eUDPJit1))
+mydatafiltered$wUDPJit3 <- as.numeric(as.character(mydatafiltered$wUDPJit3))
+mydatafiltered$eUDPJit3 <- as.numeric(as.character(mydatafiltered$eUDPJit3))
 
 View(mydatafiltered)
 mydat<-mydatafiltered[mydatafiltered$DeviceType == "Phone",]
@@ -21,7 +21,7 @@ getavgWest<-function(x,sdata){
   y<-round(y, digits = 3)
   
   newdata<-sdata[1:y,]
-  sumnewdata<-sum(newdata$wUDPJit1)
+  sumnewdata<-sum(newdata$wUDPJit3)
   print(sumnewdata)
   avgNewData<-sumnewdata/y
   avgNewData<-round(avgNewData, digits = 3)
@@ -32,7 +32,7 @@ getavgEast<-function(x,sdata){
   y<-round(y, digits = 3)
   
   newdata<-sdata[1:y,]
-  sumnewdata<-sum(newdata$eUDPJit1)
+  sumnewdata<-sum(newdata$eUDPJit3)
   avgNewData<-sumnewdata/y
   avgNewData<-round(avgNewData, digits = 3)
   return(avgNewData)
@@ -40,24 +40,24 @@ getavgEast<-function(x,sdata){
 
 #Sprint
 sprint<-mydat[mydat$Provider == "Sprint",]
-sprintsorted<-sprint[order(sprint$wUDPJit1),]
-sprintSortedEast<-sprint[order(sprint$eUDPJit1),]
+sprintsorted<-sprint[order(sprint$wUDPJit3),]
+sprintSortedEast<-sprint[order(sprint$eUDPJit3),]
 nrow(sprintSortedEast)
 
 #Verizon
 verizon<-mydat[mydat$Provider == "Verizon",]
-verizonsorted<-verizon[order(verizon$wUDPJit1),]
-verizonSortedEast<-verizon[order(verizon$eUDPJit1),]
+verizonsorted<-verizon[order(verizon$wUDPJit3),]
+verizonSortedEast<-verizon[order(verizon$eUDPJit3),]
 
 #T-Mobile
 tmobile<-mydat[mydat$Provider == "T-Mobile",]
-tmobilesorted<-tmobile[order(tmobile$wUDPJit1),]
-tmobileSortedEast<-tmobile[order(tmobile$eUDPJit1),]
+tmobilesorted<-tmobile[order(tmobile$wUDPJit3),]
+tmobileSortedEast<-tmobile[order(tmobile$eUDPJit3),]
 
 #AT&T
 att<-mydat[mydat$Provider == "AT&T",]
-attsorted<-att[order(att$wUDPJit1),]
-attSortedEast<-att[order(att$eUDPJit1),]
+attsorted<-att[order(att$wUDPJit3),]
+attSortedEast<-att[order(att$eUDPJit3),]
 
 
 #Sprint
@@ -161,8 +161,8 @@ ggplot(west, aes(percent)) +
   geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
   geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
   scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-  scale_y_continuous(name="West Average UDP Jitter 1 (Milliseconds)") +
-  ggtitle("West Phone UDP Jitter 1 (Round 10)")
+  scale_y_continuous(name="West Average UDP Jitter 3 (Milliseconds)") +
+  ggtitle("West Phone UDP Jitter 3 (Round 10)")
 # geom_line(linetype = "dashed") + 
 # geom_point()
 ggplot(east, aes(percent)) + 
@@ -171,8 +171,8 @@ ggplot(east, aes(percent)) +
   geom_line(aes(y = stE, colour = "T-Mobile"), linetype = "solid", size = .80) +
   geom_line(aes(y = ssE, colour = "Sprint"), linetype = "solid", size = .70) +
   scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-  scale_y_continuous(name="East Average UDP Jitter 1 (Milliseconds)") +
-  ggtitle("East Phone UDP Jitter 1 (Round 10)")
+  scale_y_continuous(name="East Average UDP Jitter 3 (Milliseconds)") +
+  ggtitle("East Phone UDP Jitter 3 (Round 10)")
 
 
 
@@ -180,15 +180,15 @@ ggplot(east, aes(percent)) +
 dfwest <- data.frame(Carrier=rep(c("Verizon", "AT&T","T-Mobile","Sprint"), each=7),
                      Percentage=rep(c("1", "10", "30","50","70","80", "90"),4),
                      AvgUDPJitter=c(sv[1], sv[10], sv[30], sv[50], sv[70], sv[80], sv[90],
-                              sa[1], sa[10], sa[30], sa[50], sa[70], sa[80], sa[90],
-                              st[1], st[10], st[30], st[50], st[70], st[80], st[90],
-                              ss[1], ss[10], ss[30], ss[50], ss[70], ss[80], ss[90]))
+                                    sa[1], sa[10], sa[30], sa[50], sa[70], sa[80], sa[90],
+                                    st[1], st[10], st[30], st[50], st[70], st[80], st[90],
+                                    ss[1], ss[10], ss[30], ss[50], ss[70], ss[80], ss[90]))
 dfeast <- data.frame(Carrier=rep(c("Verizon", "AT&T","T-Mobile","Sprint"), each=7),
                      Percentage=rep(c("1", "10", "30","50","70","80", "90"),4),
                      AvgUDPJitter=c(svE[1], svE[10], svE[30], svE[50], svE[70], svE[80], svE[90],
-                              saE[1], saE[10], saE[30], saE[50], saE[70], saE[80], saE[90],
-                              stE[1], stE[10], stE[30], stE[50], stE[70], stE[80], stE[90],
-                              ssE[1], ssE[10], ssE[30], ssE[50], ssE[70], ssE[80], ssE[90]))
+                                    saE[1], saE[10], saE[30], saE[50], saE[70], saE[80], saE[90],
+                                    stE[1], stE[10], stE[30], stE[50], stE[70], stE[80], stE[90],
+                                    ssE[1], ssE[10], ssE[30], ssE[50], ssE[70], ssE[80], ssE[90]))
 
 # x axis treated as continuous variable
 # dfwest$Percentage <- as.numeric(as.vector(dfwest$Percentage))
