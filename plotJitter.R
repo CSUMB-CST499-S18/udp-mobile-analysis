@@ -14,7 +14,7 @@ getavgWest<-function(x,sdata){
   #avgNewData<-round(avgNewData, digits = 0)
   return(avgNewData)
 }
-plotJitter = function(x)
+plotColumn=function(x)
 {
   #View(mydatafiltered)
   #Convert the errors to INF
@@ -24,8 +24,10 @@ plotJitter = function(x)
   mydatafiltered = mydata[c(1:8, 12, 30:53)]
   
   names(mydatafiltered)[x]<-jitterCol
-  mydatafiltered$jitterCol  <- gsub("^[a-z].*", "Inf", mydatafiltered$jitterCol)
-
+  mydatafiltered$jitterCol  <- gsub("^[a-z].*", -1, mydatafiltered$jitterCol)
+ #mean(as.numeric(as.character(mydatafiltered$jitterCol)))
+  mydatafiltered$jitterCol  <- gsub(-1,sum(as.numeric(as.character(mydatafiltered$jitterCol[mydatafiltered$jitterCol > 0])))/ length(as.numeric(as.character(mydatafiltered$jitterCol[mydatafiltered$jitterCol > 0]))), mydatafiltered$jitterCol)
+  
   #convert char to numeric 
   mydatafiltered$jitterCol <- as.numeric(as.character(mydatafiltered$jitterCol))
   mydat<-mydatafiltered[mydatafiltered$DeviceType == "Phone",]
@@ -94,14 +96,6 @@ plotJitter = function(x)
   west
   
   
-  # plot(ss,type = "l",col = "yellow", xlab = "Percent", ylab = "avgRtt", ylim=c(40,120),
-  #      main = "Rtt Comparison Chart", lwd = 5)
-  # 
-  # lines(sv, type = "l", col = "red", lwd = 5)
-  # lines(st, type = "l", col = "pink", lwd = 5)
-  # lines(sa, type = "l", col = "orange", lwd = 5)
-  
-  
   ##############################################
   ggplot(west, aes(percent)) + 
     geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
@@ -109,43 +103,17 @@ plotJitter = function(x)
     geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
     geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
     scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-    scale_y_continuous(name="West Average UDP Jitter 1 (Milliseconds)") +
-    ggtitle("West Phone")
-  
-  
+    scale_y_continuous(name="East Average Loss (Milliseconds)") +
+    ggtitle("East Phone")
   ###############################################
-#  dfwest <- data.frame(Carrier=rep(c("Verizon", "AT&T","T-Mobile","Sprint"), each=7),
- #                      Percentage=rep(c("1", "10", "30","50","70","80", "90"),4),
- ##                      AvgUDPJitter=c(sv[1], sv[10], sv[30], sv[50], sv[70], sv[80], sv[90],
-#                                sa[1], sa[10], sa[30], sa[50], sa[70], sa[80], sa[90],
- #                               st[1], st[10], st[30], st[50], st[70], st[80], st[90],
- #                               ss[1], ss[10], ss[30], ss[50], ss[70], ss[80], ss[90]))
-  
-  # x axis treated as continuous variable
-  # dfwest$Percentage <- as.numeric(as.vector(dfwest$Percentage))
-  # 
-  # ggplot(data=dfwest, aes(x=Percentage, y=AvgRtt, fill=Carrier)) +
-  #   geom_bar(stat="identity", position=position_dodge())+
-  #   scale_fill_brewer(palette="Paired")+
-  #   ggtitle("West Phone") +
-  #   theme_minimal()
-  # Axis treated as discrete variable
- # dfwest$Percentage<-as.factor(dfwest$Percentage)
- ## ggplot(data=dfwest, aes(x=Percentage, y=AvgUDPJitter, fill=Carrier)) +
-    #geom_bar(stat="identity", position=position_dodge())+
-  #  ggtitle("West Phone") +
-   # scale_fill_manual("Carriers", values = c("Verizon" = "red", 
-  #                                           "AT&T" = "orange", 
-  #3                                           "T-Mobile" = "black", 
-   #                                          "Sprint" = "blue")) +
 }
 par(mfrow=c(4,1))
 #Example: plotJitter(x)
 # x = column number for column to plot
 #west
-plotJitter(10)
-plotJitter(13)
-plotJitter(16)
-plotJitter(28)
+plotColumn(11)
+plotColumn(13)
+plotColumn(16)
+plotColumn(28)
 #east lost
-plotJitter(20)
+plotColumn(20)
