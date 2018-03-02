@@ -14,7 +14,7 @@ getavgWest<-function(x,sdata){
   #avgNewData<-round(avgNewData, digits = 0)
   return(avgNewData)
 }
-plotColumn=function(x)
+plotColumn = function(x, type)
 {
   #View(mydatafiltered)
   #Convert the errors to INF
@@ -97,23 +97,59 @@ plotColumn=function(x)
   
   
   ##############################################
-  ggplot(west, aes(percent)) + 
-    geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
-    geom_line(aes(y = sa, colour = "AT&T"), linetype = "solid", size = .90) +
-    geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
-    geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
-    scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-    scale_y_continuous(name="East Average Loss (Milliseconds)") +
-    ggtitle("East Phone")
-  ###############################################
+  if(type == "eUDPLoss") {
+    ggplot(west, aes(percent)) + 
+      geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
+      geom_line(aes(y = sa, colour = "AT&T"), linetype = "solid", size = .90) +
+      geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
+      geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
+      scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
+      scale_y_continuous(name="East Average Loss (Milliseconds)") +
+      ggtitle("East Phone")
+  } else if(type == "eUDPJit") {
+    ###############################################
+    ggplot(west, aes(percent)) + 
+      geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
+      geom_line(aes(y = sa, colour = "AT&T"), linetype = "solid", size = .90) +
+      geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
+      geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
+      scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
+      scale_y_continuous(name="East Average Jitter (Milliseconds)") +
+      ggtitle("East Phone")
+  } else if(type == "wUDPJit") {
+    ###############################################
+    ggplot(west, aes(percent)) + 
+      geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
+      geom_line(aes(y = sa, colour = "AT&T"), linetype = "solid", size = .90) +
+      geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
+      geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
+      scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
+      scale_y_continuous(name="West Average Jitter (Milliseconds)") +
+      ggtitle("West Phone")
+  }
+  else if(type == "wUDPLoss") {
+    ggplot(west, aes(percent)) + 
+      geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
+      geom_line(aes(y = sa, colour = "AT&T"), linetype = "solid", size = .90) +
+      geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
+      geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
+      scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
+      scale_y_continuous(name="West Average Loss (Milliseconds)") +
+      ggtitle("West Phone")
+  }
+
+ 
 }
 par(mfrow=c(4,1))
 #Example: plotJitter(x)
 # x = column number for column to plot
 #west
-plotColumn(11)
-plotColumn(13)
-plotColumn(16)
-plotColumn(28)
+plotColumn(11, "wUDPLoss")
+plotColumn(13, "wUDPJit")
+plotColumn(16, "wUDPJit")
+plotColumn(28, "wUDPJit")
+#east
+plotColumn(19, "eUDPLoss")
+
 #east lost
-plotColumn(20)
+plotColumn(20, "eUDPLoss")
