@@ -1,5 +1,5 @@
 library(ggplot2)
-mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/master/Cumulative_Round12_Results_Final.csv")
+mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round12_Results_Final.csv")
 mydatafiltered = mydata[c(1:8, 12, 30:53)]
 View(mydatafiltered)
 #Convert the errors to INF
