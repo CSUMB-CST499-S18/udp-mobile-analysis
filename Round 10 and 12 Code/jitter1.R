@@ -1,5 +1,5 @@
 library(ggplot2)
-mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round12_Results_Final.csv")
+mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round10_Results_Final.csv")
 mydatafiltered = mydata[c(1:8, 12, 30:53)]
 View(mydatafiltered)
 #Convert the errors to INF
@@ -40,23 +40,23 @@ getavgEast<-function(x,sdata){
 
 #Sprint
 sprint<-mydat[mydat$Provider == "Sprint",]
-sprintsorted<-sprint[order(sprint$wUDPJit1),]
+sprintSorted<-sprint[order(sprint$wUDPJit1),]
 sprintSortedEast<-sprint[order(sprint$eUDPJit1),]
 nrow(sprintSortedEast)
 
 #Verizon
 verizon<-mydat[mydat$Provider == "Verizon",]
-verizonsorted<-verizon[order(verizon$wUDPJit1),]
+verizonSorted<-verizon[order(verizon$wUDPJit1),]
 verizonSortedEast<-verizon[order(verizon$eUDPJit1),]
 
 #T-Mobile
 tmobile<-mydat[mydat$Provider == "T-Mobile",]
-tmobilesorted<-tmobile[order(tmobile$wUDPJit1),]
+tmobileSorted<-tmobile[order(tmobile$wUDPJit1),]
 tmobileSortedEast<-tmobile[order(tmobile$eUDPJit1),]
 
 #AT&T
 att<-mydat[mydat$Provider == "AT&T",]
-attsorted<-att[order(att$wUDPJit1),]
+attSorted<-att[order(att$wUDPJit1),]
 attSortedEast<-att[order(att$eUDPJit1),]
 
 
@@ -66,8 +66,8 @@ ssE = c()
 for(i in 1:100)
   #for(i in 1:10)
 {
-  ss<-c(ss,getavgWest(i,sprintsorted))
-  ssE<-c(ssE,getavgEast(i,sprintsorted))
+  ss<-c(ss,getavgWest(i,sprintSorted))
+  ssE<-c(ssE,getavgEast(i,sprintSortedEast))
   
 }
 
@@ -76,8 +76,8 @@ sv =c()
 svE =c()
 for(i in 1:100)
 {
-  sv<-c(sv,getavgWest(i,verizonsorted))
-  svE<-c(svE,getavgEast(i,verizonsorted))
+  sv<-c(sv,getavgWest(i,verizonSorted))
+  svE<-c(svE,getavgEast(i,verizonSortedEast))
   
 }
 #T-Mobile
@@ -85,8 +85,8 @@ st =c()
 stE =c()
 for(i in 1:100)
 {
-  st<-c(st,getavgWest(i,tmobilesorted))
-  stE<-c(stE,getavgEast(i,tmobilesorted))
+  st<-c(st,getavgWest(i,tmobileSorted))
+  stE<-c(stE,getavgEast(i,tmobileSortedEast))
   
 }
 
@@ -95,8 +95,8 @@ sa =c()
 saE =c()
 for(i in 1:100)
 {
-  sa<-c(sa,getavgWest(i,attsorted))
-  saE<-c(saE,getavgEast(i,attsorted))
+  sa<-c(sa,getavgWest(i,attSorted))
+  saE<-c(saE,getavgEast(i,attSortedEast))
   
 }
 
@@ -162,7 +162,7 @@ ggplot(west, aes(percent)) +
   geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
   scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
   scale_y_continuous(name="West Average UDP Jitter 1 (Milliseconds)", limits=c(0,15)) +
-  ggtitle("West Phone UDP Jitter 1 (Round 12)")
+  ggtitle("West Phone UDP Jitter 1 (Round 10)")
 # geom_line(linetype = "dashed") + 
 # geom_point()
 ggplot(east, aes(percent)) + 
@@ -171,8 +171,8 @@ ggplot(east, aes(percent)) +
   geom_line(aes(y = stE, colour = "T-Mobile"), linetype = "solid", size = .80) +
   geom_line(aes(y = ssE, colour = "Sprint"), linetype = "solid", size = .70) +
   scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-  scale_y_continuous(name="East Average UDP Jitter 1 (Milliseconds)") +
-  ggtitle("East Phone UDP Jitter 1 (Round 12)")
+  scale_y_continuous(name="East Average UDP Jitter 1 (Milliseconds)", limits=c(0,15)) +
+  ggtitle("East Phone UDP Jitter 1 (Round 10)")
 
 
 

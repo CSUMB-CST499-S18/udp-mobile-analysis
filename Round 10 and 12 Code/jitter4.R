@@ -40,23 +40,23 @@ getavgEast<-function(x,sdata){
 
 #Sprint
 sprint<-mydat[mydat$Provider == "Sprint",]
-sprintsorted<-sprint[order(sprint$wUDPJit4),]
+sprintSorted<-sprint[order(sprint$wUDPJit4),]
 sprintSortedEast<-sprint[order(sprint$eUDPJit4),]
 nrow(sprintSortedEast)
 
 #Verizon
 verizon<-mydat[mydat$Provider == "Verizon",]
-verizonsorted<-verizon[order(verizon$wUDPJit4),]
+verizonSorted<-verizon[order(verizon$wUDPJit4),]
 verizonSortedEast<-verizon[order(verizon$eUDPJit4),]
 
 #T-Mobile
 tmobile<-mydat[mydat$Provider == "T-Mobile",]
-tmobilesorted<-tmobile[order(tmobile$wUDPJit4),]
+tmobileSorted<-tmobile[order(tmobile$wUDPJit4),]
 tmobileSortedEast<-tmobile[order(tmobile$eUDPJit4),]
 
 #AT&T
 att<-mydat[mydat$Provider == "AT&T",]
-attsorted<-att[order(att$wUDPJit4),]
+attSorted<-att[order(att$wUDPJit4),]
 attSortedEast<-att[order(att$eUDPJit4),]
 
 
@@ -66,8 +66,8 @@ ssE = c()
 for(i in 1:100)
   #for(i in 1:10)
 {
-  ss<-c(ss,getavgWest(i,sprintsorted))
-  ssE<-c(ssE,getavgEast(i,sprintsorted))
+  ss<-c(ss,getavgWest(i,sprintSorted))
+  ssE<-c(ssE,getavgEast(i,sprintSortedEast))
   
 }
 
@@ -76,8 +76,8 @@ sv =c()
 svE =c()
 for(i in 1:100)
 {
-  sv<-c(sv,getavgWest(i,verizonsorted))
-  svE<-c(svE,getavgEast(i,verizonsorted))
+  sv<-c(sv,getavgWest(i,verizonSorted))
+  svE<-c(svE,getavgEast(i,verizonSortedEast))
   
 }
 #T-Mobile
@@ -85,8 +85,8 @@ st =c()
 stE =c()
 for(i in 1:100)
 {
-  st<-c(st,getavgWest(i,tmobilesorted))
-  stE<-c(stE,getavgEast(i,tmobilesorted))
+  st<-c(st,getavgWest(i,tmobileSorted))
+  stE<-c(stE,getavgEast(i,tmobileSortedEast))
   
 }
 
@@ -95,8 +95,8 @@ sa =c()
 saE =c()
 for(i in 1:100)
 {
-  sa<-c(sa,getavgWest(i,attsorted))
-  saE<-c(saE,getavgEast(i,attsorted))
+  sa<-c(sa,getavgWest(i,attSorted))
+  saE<-c(saE,getavgEast(i,attSortedEast))
   
 }
 
@@ -161,7 +161,7 @@ ggplot(west, aes(percent)) +
   geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
   geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
   scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-  scale_y_continuous(name="West Average UDP Jitter 4 (Milliseconds)") +
+  scale_y_continuous(name="West Average UDP Jitter 4 (Milliseconds)", limits=c(0,15)) +
   ggtitle("West Phone UDP Jitter 4 (Round 12)")
 # geom_line(linetype = "dashed") + 
 # geom_point()
@@ -180,15 +180,15 @@ ggplot(east, aes(percent)) +
 dfwest <- data.frame(Carrier=rep(c("Verizon", "AT&T","T-Mobile","Sprint"), each=7),
                      Percentage=rep(c("1", "10", "30","50","70","80", "90"),4),
                      AvgUDPJitter=c(sv[1], sv[10], sv[30], sv[50], sv[70], sv[80], sv[90],
-                                    sa[1], sa[10], sa[30], sa[50], sa[70], sa[80], sa[90],
-                                    st[1], st[10], st[30], st[50], st[70], st[80], st[90],
-                                    ss[1], ss[10], ss[30], ss[50], ss[70], ss[80], ss[90]))
+                              sa[1], sa[10], sa[30], sa[50], sa[70], sa[80], sa[90],
+                              st[1], st[10], st[30], st[50], st[70], st[80], st[90],
+                              ss[1], ss[10], ss[30], ss[50], ss[70], ss[80], ss[90]))
 dfeast <- data.frame(Carrier=rep(c("Verizon", "AT&T","T-Mobile","Sprint"), each=7),
                      Percentage=rep(c("1", "10", "30","50","70","80", "90"),4),
                      AvgUDPJitter=c(svE[1], svE[10], svE[30], svE[50], svE[70], svE[80], svE[90],
-                                    saE[1], saE[10], saE[30], saE[50], saE[70], saE[80], saE[90],
-                                    stE[1], stE[10], stE[30], stE[50], stE[70], stE[80], stE[90],
-                                    ssE[1], ssE[10], ssE[30], ssE[50], ssE[70], ssE[80], ssE[90]))
+                              saE[1], saE[10], saE[30], saE[50], saE[70], saE[80], saE[90],
+                              stE[1], stE[10], stE[30], stE[50], stE[70], stE[80], stE[90],
+                              ssE[1], ssE[10], ssE[30], ssE[50], ssE[70], ssE[80], ssE[90]))
 
 # x axis treated as continuous variable
 # dfwest$Percentage <- as.numeric(as.vector(dfwest$Percentage))

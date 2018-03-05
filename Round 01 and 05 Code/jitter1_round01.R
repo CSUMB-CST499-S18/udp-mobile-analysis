@@ -134,10 +134,10 @@ east
 #joined east west
 eastWest = c()
 eastWest<-cbind(percent,sv,sa,st,ss,svE,saE,stE,ssE)
-eastWest <- transform(eastWest,  percent = as.numeric(percent), 
-                      svE = as.numeric(svE), 
-                      saE = as.numeric(saE), 
-                      stE = as.numeric(stE), 
+eastWest <- transform(eastWest,  percent = as.numeric(percent),
+                      svE = as.numeric(svE),
+                      saE = as.numeric(saE),
+                      stE = as.numeric(stE),
                       ssE = as.numeric(ssE),
                       sv = as.numeric(sv),
                       sa = as.numeric(sa),
