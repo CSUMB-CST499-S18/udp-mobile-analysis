@@ -3,15 +3,15 @@ mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile
 mydatafiltered = mydata[c(3:10, 15, 24:47)]
 View(mydatafiltered)
 #Convert the errors to INF
-mydatafiltered$wUDP.Jitter1 = as.character(mydatafiltered$wUDP.Jitter1)
-mydatafiltered$eUDP.Jitter1 = as.character(mydatafiltered$eUDP.Jitter1)
-mydatafiltered$wUDP.Jitter1 <- gsub("NA", "Inf", mydatafiltered$wUDP.Jitter1)
-mydatafiltered$eUDP.Jitter1 <- gsub("NA", "Inf", mydatafiltered$eUDP.Jitter1)
+mydatafiltered$wUDP.Jitter4 = as.character(mydatafiltered$wUDP.Jitter4)
+mydatafiltered$eUDP.Jitter4 = as.character(mydatafiltered$eUDP.Jitter4)
+mydatafiltered$wUDP.Jitter4 <- gsub("NA", "Inf", mydatafiltered$wUDP.Jitter4)
+mydatafiltered$eUDP.Jitter4 <- gsub("NA", "Inf", mydatafiltered$eUDP.Jitter4)
 
 
 #convert char to numeric 
-mydatafiltered$wUDP.Jitter1 <- as.numeric(as.character(mydatafiltered$wUDP.Jitter1))
-mydatafiltered$eUDP.Jitter1 <- as.numeric(as.character(mydatafiltered$eUDP.Jitter1))
+mydatafiltered$wUDP.Jitter4 <- as.numeric(as.character(mydatafiltered$wUDP.Jitter4))
+mydatafiltered$eUDP.Jitter4 <- as.numeric(as.character(mydatafiltered$eUDP.Jitter4))
 
 View(mydatafiltered)
 mydat<-mydatafiltered[mydatafiltered$Client_Type == " Phone",]
@@ -21,7 +21,7 @@ getavgWest<-function(x,sdata){
   y<-round(y, digits = 3)
   
   newdata<-sdata[1:y,]
-  sumnewdata<-sum(newdata$wUDP.Jitter1)
+  sumnewdata<-sum(newdata$wUDP.Jitter4)
   print(sumnewdata)
   avgNewData<-sumnewdata/y
   avgNewData<-round(avgNewData, digits = 3)
@@ -32,7 +32,7 @@ getavgEast<-function(x,sdata){
   y<-round(y, digits = 3)
   
   newdata<-sdata[1:y,]
-  sumnewdata<-sum(newdata$eUDP.Jitter1)
+  sumnewdata<-sum(newdata$eUDP.Jitter4)
   avgNewData<-sumnewdata/y
   avgNewData<-round(avgNewData, digits = 3)
   return(avgNewData)
@@ -40,24 +40,24 @@ getavgEast<-function(x,sdata){
 
 #Sprint
 sprint<-mydat[mydat$Provider == " Sprint",]
-sprintSorted<-sprint[order(sprint$wUDP.Jitter1),]
-sprintSortedEast<-sprint[order(sprint$eUDP.Jitter1),]
+sprintSorted<-sprint[order(sprint$wUDP.Jitter4),]
+sprintSortedEast<-sprint[order(sprint$eUDP.Jitter4),]
 nrow(sprintSortedEast)
 
 #Verizon
 verizon<-mydat[mydat$Provider == " Verizon",]
-verizonSorted<-verizon[order(verizon$wUDP.Jitter1),]
-verizonSortedEast<-verizon[order(verizon$eUDP.Jitter1),]
+verizonSorted<-verizon[order(verizon$wUDP.Jitter4),]
+verizonSortedEast<-verizon[order(verizon$eUDP.Jitter4),]
 
 #T-Mobile
 tmobile<-mydat[mydat$Provider == " T-Mobile",]
-tmobileSorted<-tmobile[order(tmobile$wUDP.Jitter1),]
-tmobileSortedEast<-tmobile[order(tmobile$eUDP.Jitter1),]
+tmobileSorted<-tmobile[order(tmobile$wUDP.Jitter4),]
+tmobileSortedEast<-tmobile[order(tmobile$eUDP.Jitter4),]
 
 #AT&T
 att<-mydat[mydat$Provider == " AT&T",]
-attSorted<-att[order(att$wUDP.Jitter1),]
-attSortedEast<-att[order(att$eUDP.Jitter1),]
+attSorted<-att[order(att$wUDP.Jitter4),]
+attSortedEast<-att[order(att$eUDP.Jitter4),]
 
 
 #Sprint
@@ -161,8 +161,8 @@ ggplot(west, aes(percent)) +
   geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
   geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
   scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-  scale_y_continuous(name="West Average UDP Jitter 1 (Milliseconds)") +
-  ggtitle("West Phone UDP Jitter 1 (Round 5)")
+  scale_y_continuous(name="West Average UDP Jitter 4 (Milliseconds)") +
+  ggtitle("West Phone UDP Jitter 4 (Round 5)")
 # geom_line(linetype = "dashed") + 
 # geom_point()
 ggplot(east, aes(percent)) + 
@@ -171,8 +171,8 @@ ggplot(east, aes(percent)) +
   geom_line(aes(y = stE, colour = "T-Mobile"), linetype = "solid", size = .80) +
   geom_line(aes(y = ssE, colour = "Sprint"), linetype = "solid", size = .70) +
   scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-  scale_y_continuous(name="East Average UDP Jitter 1 (Milliseconds)") +
-  ggtitle("East Phone UDP Jitter 1 (Round 5)")
+  scale_y_continuous(name="East Average UDP Jitter 4 (Milliseconds)") +
+  ggtitle("East Phone UDP Jitter 4 (Round 5)")
 
 
 
