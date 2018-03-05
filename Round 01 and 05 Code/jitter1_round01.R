@@ -1,5 +1,5 @@
 library(ggplot2)
-mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round05_Results_Final.csv")
+mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round01_Results_Final.csv")
 mydatafiltered = mydata[c(3:10, 15, 24:47)]
 View(mydatafiltered)
 #Convert the errors to INF
@@ -14,7 +14,7 @@ mydatafiltered$wUDP.Jitter1 <- as.numeric(as.character(mydatafiltered$wUDP.Jitte
 mydatafiltered$eUDP.Jitter1 <- as.numeric(as.character(mydatafiltered$eUDP.Jitter1))
 
 View(mydatafiltered)
-mydat<-mydatafiltered[mydatafiltered$Client_Type == " Phone",]
+mydat<-mydatafiltered[mydatafiltered$Client.Type == " Phone",]
 getavgWest<-function(x,sdata){
   y<-nrow(sdata)*(x/100)
   print(y)
@@ -39,23 +39,23 @@ getavgEast<-function(x,sdata){
 }
 
 #Sprint
-sprint<-mydat[mydat$Provider == " Sprint",]
+sprint<-mydat[mydat$Provider == "Sprint",]
 sprintsorted<-sprint[order(sprint$wUDP.Jitter1),]
 sprintSortedEast<-sprint[order(sprint$eUDP.Jitter1),]
 nrow(sprintSortedEast)
 
 #Verizon
-verizon<-mydat[mydat$Provider == " Verizon",]
+verizon<-mydat[mydat$Provider == "Verizon",]
 verizonsorted<-verizon[order(verizon$wUDP.Jitter1),]
 verizonSortedEast<-verizon[order(verizon$eUDP.Jitter1),]
 
 #T-Mobile
-tmobile<-mydat[mydat$Provider == " T-Mobile",]
+tmobile<-mydat[mydat$Provider == "T-Mobile",]
 tmobilesorted<-tmobile[order(tmobile$wUDP.Jitter1),]
 tmobileSortedEast<-tmobile[order(tmobile$eUDP.Jitter1),]
 
 #AT&T
-att<-mydat[mydat$Provider == " AT&T",]
+att<-mydat[mydat$Provider == "AT&T",]
 attsorted<-att[order(att$wUDP.Jitter1),]
 attSortedEast<-att[order(att$eUDP.Jitter1),]
 
@@ -162,7 +162,7 @@ ggplot(west, aes(percent)) +
   geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
   scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
   scale_y_continuous(name="West Average UDP Jitter 1 (Milliseconds)", limits=c(0,15)) +
-  ggtitle("West Phone UDP Jitter 1 (Round 1)")
+  ggtitle("West Phone UDP Jitter 1 (Round 5)")
 # geom_line(linetype = "dashed") + 
 # geom_point()
 ggplot(east, aes(percent)) + 
@@ -172,7 +172,7 @@ ggplot(east, aes(percent)) +
   geom_line(aes(y = ssE, colour = "Sprint"), linetype = "solid", size = .70) +
   scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
   scale_y_continuous(name="East Average UDP Jitter 1 (Milliseconds)") +
-  ggtitle("East Phone UDP Jitter 1 (Round 1)")
+  ggtitle("East Phone UDP Jitter 1 (Round 5)")
 
 
 
@@ -219,7 +219,6 @@ ggplot(data=dfeast, aes(x=Percentage, y=AvgUDPJitter, fill=Carrier)) +
                                            "T-Mobile" = "black", 
                                            "Sprint" = "blue")) +
   theme_minimal()
-
 
 
 
