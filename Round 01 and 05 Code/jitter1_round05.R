@@ -1,5 +1,5 @@
 library(ggplot2)
-mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round05_Results_Final.csv")
+mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round01_Results_Final.csv")
 mydatafiltered = mydata[c(3:10, 15, 24:47)]
 View(mydatafiltered)
 #Convert the errors to INF
@@ -219,7 +219,6 @@ ggplot(data=dfeast, aes(x=Percentage, y=AvgUDPJitter, fill=Carrier)) +
                                            "T-Mobile" = "black", 
                                            "Sprint" = "blue")) +
   theme_minimal()
-
 
 
 
