@@ -162,7 +162,7 @@ ggplot(west, aes(percent)) +
   geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
   scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
   scale_y_continuous(name="West Average UDP Jitter 1 (Milliseconds)", limits=c(0,15)) +
-  ggtitle("West Phone UDP Jitter 1 (Round 1)")
+  ggtitle("West Phone UDP Jitter 1 (Round 5)")
 # geom_line(linetype = "dashed") + 
 # geom_point()
 ggplot(east, aes(percent)) + 
@@ -172,7 +172,7 @@ ggplot(east, aes(percent)) +
   geom_line(aes(y = ssE, colour = "Sprint"), linetype = "solid", size = .70) +
   scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
   scale_y_continuous(name="East Average UDP Jitter 1 (Milliseconds)") +
-  ggtitle("East Phone UDP Jitter 1 (Round 1)")
+  ggtitle("East Phone UDP Jitter 1 (Round 5)")
 
 
 
