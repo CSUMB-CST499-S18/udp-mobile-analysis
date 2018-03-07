@@ -16,7 +16,7 @@ getavgWest<-function(x,sdata){
 }
 plotColumn = function(x, type)
 {
-  #View(mydatafiltered)
+  View(mydatafiltered)
   #Convert the errors to INF
   jitterCol="jitterCol"
   mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/master/Cumulative_Round10_Results_Final.csv")
@@ -96,7 +96,6 @@ plotColumn = function(x, type)
   west
   
   
-  ##############################################
   if(type == "eUDPLoss") {
     ggplot(west, aes(percent)) + 
       geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
@@ -107,7 +106,6 @@ plotColumn = function(x, type)
       scale_y_continuous(name="East Average Loss (Milliseconds)") +
       ggtitle("East Phone")
   } else if(type == "eUDPJit") {
-    ###############################################
     ggplot(west, aes(percent)) + 
       geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
       geom_line(aes(y = sa, colour = "AT&T"), linetype = "solid", size = .90) +
@@ -117,7 +115,6 @@ plotColumn = function(x, type)
       scale_y_continuous(name="East Average Jitter (Milliseconds)") +
       ggtitle("East Phone")
   } else if(type == "wUDPJit") {
-    ###############################################
     ggplot(west, aes(percent)) + 
       geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
       geom_line(aes(y = sa, colour = "AT&T"), linetype = "solid", size = .90) +
