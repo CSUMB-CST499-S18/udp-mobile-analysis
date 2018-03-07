@@ -16,7 +16,7 @@ getavgWest<-function(x,sdata){
 }
 plotColumn = function(x, type)
 {
-  View(mydatafiltered)
+  #View(mydatafiltered)
   #Convert the errors to INF
   jitterCol="jitterCol"
   mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/master/Cumulative_Round10_Results_Final.csv")
