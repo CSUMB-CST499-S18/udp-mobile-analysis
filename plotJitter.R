@@ -21,8 +21,8 @@ plotColumn = function(x, type)
   jitterCol="jitterCol"
   mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/master/Cumulative_Round10_Results_Final.csv")
   
-  mydatafiltered = mydata[c(1:8, 12, 30:53)]
-  
+  mydatafiltered = mydata[c(1:8, 12,24,30:53)]
+  View(mydatafiltered)
   names(mydatafiltered)[x]<-jitterCol
   mydatafiltered$jitterCol  <- gsub("^[a-z].*", -1, mydatafiltered$jitterCol)
  #mean(as.numeric(as.character(mydatafiltered$jitterCol)))
@@ -94,8 +94,8 @@ plotColumn = function(x, type)
                     ss = as.numeric(ss))
   
   west
-  
-  
+  jitters=c("wUDPJit1", "wUDPJit2", "wUDPJit3", "wUDPJit4")
+  names(jitters) = c("11","14","17","29")
   if(type == "eUDPLoss") {
     ggplot(west, aes(percent)) + 
       geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
@@ -121,8 +121,9 @@ plotColumn = function(x, type)
       geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
       geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
       scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-      scale_y_continuous(name="West Average Jitter (Milliseconds)") +
+      scale_y_continuous(name=paste("West Average Jitter [",jitters[as.character(x)], "]", "(Milliseconds)", sep = " ")) +
       ggtitle("West Phone")
+    
   }
   else if(type == "wUDPLoss") {
     ggplot(west, aes(percent)) + 
@@ -134,6 +135,16 @@ plotColumn = function(x, type)
       scale_y_continuous(name="West Average Loss (Milliseconds)") +
       ggtitle("West Phone")
   }
+  else if(type == "wRttAvg") {
+    ggplot(west, aes(percent)) + 
+      geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
+      geom_line(aes(y = sa, colour = "AT&T"), linetype = "solid", size = .90) +
+      geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
+      geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
+      scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
+      scale_y_continuous(name="West Average RTT (Milliseconds)") +
+      ggtitle("West Phone")
+  }
 
  
 }
@@ -141,12 +152,4 @@ par(mfrow=c(4,1))
 #Example: plotJitter(x)
 # x = column number for column to plot
 #west
-plotColumn(11, "wUDPLoss")
-plotColumn(13, "wUDPJit")
-plotColumn(16, "wUDPJit")
-plotColumn(28, "wUDPJit")
-#east
-plotColumn(19, "eUDPLoss")
-
-#east lost
-plotColumn(20, "eUDPLoss")
+plotColumn(29, "wUDPJit")
