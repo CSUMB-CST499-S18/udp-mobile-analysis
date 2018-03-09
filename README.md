@@ -10,13 +10,13 @@ Time spent: **6** hours spent in total
 
 The following **required** functionality is completed:
 
-- [x] User can sign up to create a new account using Parse authentication (+1pt)
-- [x] User can log in and log out of his or her account (+1pt)
-- [x] The current signed in user is persisted across app restarts (+1pt)
-- [X] User can take a photo, add a caption, and post it to "Instagram" (+2pt)
-- [X] User can view the last 20 posts submitted to "Instagram" (+2pt)
-- [x] User can pull to refresh the last 20 posts submitted to "Instagram" (+1pt)
-- [x] User can tap a post to view post details, including timestamp and caption (+2pt)
+- [x] x (+1pt)
+- [x] x (+1pt)
+- [x] x (+1pt)
+- [X] x (+2pt)
+- [X] x (+2pt)
+- [x] x (+1pt)
+- [x] x (+2pt)
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
@@ -39,7 +39,7 @@ The challenges with building this app consisted of researching Parse and learnin
 
 ## License
 
-    Copyright [2018] [Israel Andrade]
+    Copyright [2018] [X]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
