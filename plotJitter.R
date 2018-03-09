@@ -19,9 +19,9 @@ plotColumn = function(x, type)
   #View(mydatafiltered)
   #Convert the errors to INF
   jitterCol="jitterCol"
-  mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/master/Cumulative_Round10_Results_Final.csv")
+  mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/tcpAndUdpComparison/Round12/Cumulative_Round12_Results_Final.csv")
   
-  mydatafiltered = mydata[c(1:8, 12,24,30:53)]
+  mydatafiltered = mydata[c(1:8,12,18:53)]
   View(mydatafiltered)
   names(mydatafiltered)[x]<-jitterCol
   mydatafiltered$jitterCol  <- gsub("^[a-z].*", -1, mydatafiltered$jitterCol)
@@ -95,9 +95,9 @@ plotColumn = function(x, type)
   
   west
   jitters=c("wUDPJit1", "wUDPJit2", "wUDPJit3", "wUDPJit4")
-  names(jitters) = c("11","14","17","29")
+  names(jitters) = c("22","25","28","40")
   jittersEast = c("eUDPJit1","eUDPJit2", "eUDPJit3", "eUDPJit4")
-  names(jittersEast) = c("20", "23", "26", "32")
+  names(jittersEast) = c("31", "34", "37", "43")
   if(type == "eUDPLoss") {
     ggplot(west, aes(percent)) + 
       geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
@@ -147,6 +147,16 @@ plotColumn = function(x, type)
       scale_y_continuous(name="West Average RTT (Milliseconds)") +
       ggtitle("West Phone")
   }
+  else if(type == "eRttAvg") {
+    ggplot(west, aes(percent)) + 
+      geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
+      geom_line(aes(y = sa, colour = "AT&T"), linetype = "solid", size = .90) +
+      geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
+      geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
+      scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
+      scale_y_continuous(name="East Average RTT (Milliseconds)") +
+      ggtitle("East Phone")
+  }
 
  
 }
@@ -154,5 +164,5 @@ par(mfrow=c(4,1))
 #Example: plotJitter(x)
 # x = column number for column to plot
 #west
-plotColumn(32, "eUDPJit")
+plotColumn(16, "wRttAvg")
 
