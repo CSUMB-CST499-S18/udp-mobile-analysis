@@ -96,6 +96,8 @@ plotColumn = function(x, type)
   west
   jitters=c("wUDPJit1", "wUDPJit2", "wUDPJit3", "wUDPJit4")
   names(jitters) = c("11","14","17","29")
+  jittersEast = c("eUDPJit1","eUDPJit2", "eUDPJit3", "eUDPJit4")
+  names(jittersEast) = c("20", "23", "26", "32")
   if(type == "eUDPLoss") {
     ggplot(west, aes(percent)) + 
       geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
@@ -112,7 +114,7 @@ plotColumn = function(x, type)
       geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
       geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
       scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-      scale_y_continuous(name="East Average Jitter (Milliseconds)") +
+      scale_y_continuous(name=paste("East Average Jitter[",jittersEast[as.character(x)], "] (Milliseconds)", sep= " ")) +
       ggtitle("East Phone")
   } else if(type == "wUDPJit") {
     ggplot(west, aes(percent)) + 
@@ -152,4 +154,5 @@ par(mfrow=c(4,1))
 #Example: plotJitter(x)
 # x = column number for column to plot
 #west
-plotColumn(29, "wUDPJit")
+plotColumn(32, "eUDPJit")
+
