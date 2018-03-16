@@ -109,7 +109,7 @@ Round 1, Round 05, Round 10, Round 12 Data comparisons
     #Round 10
     r_10 = c()
     for(i in 1:100)
-      #for(i in 1:10)
+    #for(i in 1:10)
     {
       r_10<-c(r_10,getavgWest(i,round10_sorted))
     }
@@ -158,7 +158,7 @@ Round 1, Round 05, Round 10, Round 12 Data comparisons
         geom_line(aes(y = r_12, colour = "Round 12"), linetype = "solid", size = .80) +
         geom_line(aes(y = r_10, colour = "Round 10"), linetype = "solid", size = .70) +
         scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-        scale_y_continuous(name=paste("East Average Loss (Milliseconds)", provider, sep = " ")) +
+        scale_y_continuous(name="East Average Loss (Milliseconds)") +
         ggtitle(paste("East Phone", provider, sep = " "))
     } else if(type == "eUDPJit") {
       ggplot(west, aes(percent)) + 
@@ -167,8 +167,8 @@ Round 1, Round 05, Round 10, Round 12 Data comparisons
         geom_line(aes(y = r_12, colour = "Round 12"), linetype = "solid", size = .80) +
         geom_line(aes(y = r_10, colour = "Round 10"), linetype = "solid", size = .70) +
         scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-        scale_y_continuous(name=paste("East Average Jitter[(Milliseconds)",provider, sep= " ")) +
-        ggtitle("East Phone")
+        scale_y_continuous(name="East Average Jitter[(Milliseconds)") +
+        ggtitle(paste("East Phone", provider, sep = " "))
     } else if(type == "wUDPJit") {
       ggplot(west, aes(percent)) + 
         geom_line(aes(y = r_01, colour = "Round 01"), linetype = "solid", size = 1) +
@@ -176,7 +176,7 @@ Round 1, Round 05, Round 10, Round 12 Data comparisons
         geom_line(aes(y = r_12, colour = "Round 12"), linetype = "solid", size = .80) +
         geom_line(aes(y = r_10, colour = "Round 10"), linetype = "solid", size = .70) +
         scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-        scale_y_continuous(name=paste("West Average Jitterjitters (Milliseconds)", provider ,sep = " ")) +
+        scale_y_continuous(name="West Average Jitterjitters (Milliseconds)") +
         ggtitle(paste("West Phone", provider, sep = " "))
       
     }
@@ -187,7 +187,7 @@ Round 1, Round 05, Round 10, Round 12 Data comparisons
         geom_line(aes(y = r_12, colour = "Round 12"), linetype = "solid", size = .80) +
         geom_line(aes(y = r_10, colour = "Round 10"), linetype = "solid", size = .70) +
         scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-        scale_y_continuous(name= paste("West Average Loss (Milliseconds)", provider, sep = " ")) +
+        scale_y_continuous(name= "West Average Loss (Milliseconds)") +
         ggtitle(paste("West Phone", provider, sep = " "))
     }
     else if(type == "wRttAvg") {
@@ -197,7 +197,7 @@ Round 1, Round 05, Round 10, Round 12 Data comparisons
         geom_line(aes(y = r_12, colour = "Round 12"), linetype = "solid", size = .80) +
         geom_line(aes(y = r_10, colour = "Round 10"), linetype = "solid", size = .70) +
         scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-        scale_y_continuous(name=paste("West Average Loss (Milliseconds)", provider, sep = " ")) +
+        scale_y_continuous(name="West Average Loss (Milliseconds)") +
         ggtitle(paste("West Phone", provider, sep = " "))
     }
     else if(type == "eRttAvg") {
@@ -207,7 +207,7 @@ Round 1, Round 05, Round 10, Round 12 Data comparisons
         geom_line(aes(y = r_12, colour = "Round 12"), linetype = "solid", size = .80) +
         geom_line(aes(y = r_10, colour = "Round 10"), linetype = "solid", size = .70) +
         scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-        scale_y_continuous(name= paste("East Average RTT (Milliseconds)", provider, sep = " ")) +
+        scale_y_continuous(name= "East Average RTT (Milliseconds)") +
         ggtitle(paste("East Phone", provider, sep = " "))
     }
   
