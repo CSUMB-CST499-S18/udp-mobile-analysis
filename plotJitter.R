@@ -19,10 +19,17 @@ plotColumn = function(x, type)
   #View(mydatafiltered)
   #Convert the errors to INF
   jitterCol="jitterCol"
-  mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/tcpAndUdpComparison/Round12/Cumulative_Round12_Results_Final.csv")
+  #mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/tcpAndUdpComparison/Round12/Cumulative_Round12_Results_Final.csv")
+  #Round 1
+  mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round01_Results_Final.csv", na.strings = c("NA", "N/A"))
+  #Round 5
+  #mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round05_Results_Final.csv", na.strings = c("NA", "N/A"))
+  #Round 10
+  #mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/tcpAndUdpComparison/Cumulative_Round10_Results_Final.csv", na.strings = c("NA", "N/A"))
+  #Round 12
+  #mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/tcpAndUdpComparison/Round12/Cumulative_Round12_Results_Final.csv", na.strings = c("NA", "N/A"))
   
-  mydatafiltered = mydata[c(1:8,12,18:53)]
-  View(mydatafiltered)
+  mydatafiltered = mydata[c(1:9,15:53)]
   names(mydatafiltered)[x]<-jitterCol
   mydatafiltered$jitterCol  <- gsub("^[a-z].*", -1, mydatafiltered$jitterCol)
  #mean(as.numeric(as.character(mydatafiltered$jitterCol)))
@@ -30,7 +37,8 @@ plotColumn = function(x, type)
   
   #convert char to numeric 
   mydatafiltered$jitterCol <- as.numeric(as.character(mydatafiltered$jitterCol))
-  mydat<-mydatafiltered[mydatafiltered$DeviceType == "Phone",]
+  mydatafiltered = na.omit(mydatafiltered)
+  mydat<-mydatafiltered[mydatafiltered$Client.Type == " Phone",]
 
 
   
@@ -105,8 +113,8 @@ plotColumn = function(x, type)
       geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
       geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
       scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-      scale_y_continuous(name="East Average Loss (Milliseconds)") +
-      ggtitle("East Phone")
+      scale_y_continuous(name="East Average Loss Datagram Loss Rate (%))") +
+      ggtitle("East Phone Round 01")
   } else if(type == "eUDPJit") {
     ggplot(west, aes(percent)) + 
       geom_line(aes(y = sv, colour = "Verizon"), linetype = "solid", size = 1) +
@@ -134,8 +142,8 @@ plotColumn = function(x, type)
       geom_line(aes(y = st, colour = "T-Mobile"), linetype = "solid", size = .80) +
       geom_line(aes(y = ss, colour = "Sprint"), linetype = "solid", size = .70) +
       scale_x_continuous(name="Percentage (%)", limits=c(0, 100)) +
-      scale_y_continuous(name="West Average Loss (Milliseconds)") +
-      ggtitle("West Phone")
+      scale_y_continuous(name="West Average Datagram Loss Rate (%)") +
+      ggtitle("West Phone Round 01")
   }
   else if(type == "wRttAvg") {
     ggplot(west, aes(percent)) + 
@@ -164,5 +172,5 @@ par(mfrow=c(4,1))
 #Example: plotJitter(x)
 # x = column number for column to plot
 #west
-plotColumn(16, "wRttAvg")
+plotColumn(29, "eUDPLoss")
 
