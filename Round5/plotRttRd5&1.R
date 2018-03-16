@@ -15,40 +15,41 @@ getavgEast<-function(x,sdata){
 
 plotColumn = function(x, type)
 {
-  #View(mydatafiltered)
   #Convert the errors to INF
   jitterCol="jitterCol"
-  mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round05_Results_Final.csv", na.strings = c("N/A", " NA"))
+  mydata = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round01_Results_Final.csv", na.strings = c("N/A", " NA", "no effective service", " no effective service"))
   
   #mydatafiltered = mydata[c(1:8, 12, 30:53)]
-  mydatafiltered = mydata[c(1:8, 12, 30:53, 20, 18,15)]
+  mydatafiltered = mydata[c(1:8, 12, 30:53, 20, 18, 15)]
   mydatafiltered = na.omit(mydatafiltered)
   
-  names(mydatafiltered)[35]<-jitterCol
+  View(mydatafiltered)
+  
+  names(mydatafiltered)[x]<-jitterCol
   mydatafiltered$jitterCol  <- gsub("^[a-z].*", -1, mydatafiltered$jitterCol)
   #mean(as.numeric(as.character(mydatafiltered$jitterCol)))
   mydatafiltered$jitterCol  <- gsub(-1,sum(as.numeric(as.character(mydatafiltered$jitterCol[mydatafiltered$jitterCol > 0])))/ length(as.numeric(as.character(mydatafiltered$jitterCol[mydatafiltered$jitterCol > 0]))), mydatafiltered$jitterCol)
   
   #convert char to numeric 
   mydatafiltered$jitterCol <- as.numeric(as.character(mydatafiltered$jitterCol))
-  mydat<-mydatafiltered[mydatafiltered$Client_Type == " Phone",]
+  mydat<-mydatafiltered[mydatafiltered$Client.Type == " Phone",] #Client.Type for RD1
   
   View()
   
   #Sprint
-  sprint<-mydat[mydat$Provider == " Sprint",]
+  sprint<-mydat[mydat$Provider == "Sprint",]
   sprintsorted<-sprint[order(sprint$jitterCol),]
   
   #Verizon
-  verizon<-mydat[mydat$Provider == " Verizon",]
+  verizon<-mydat[mydat$Provider == "Verizon",]
   verizonsorted<-verizon[order(verizon$jitterCol),]
   
   #T-Mobile
-  tmobile<-mydat[mydat$Provider == " T-Mobile",]
+  tmobile<-mydat[mydat$Provider == "T-Mobile",]
   tmobilesorted<-tmobile[order(tmobile$jitterCol),]
   
   #AT&T
-  att<-mydat[mydat$Provider == " AT&T",]
+  att<-mydat[mydat$Provider == "AT&T",]
   attsorted<-att[order(att$jitterCol),]
   
   #Sprint
@@ -108,7 +109,9 @@ plotColumn = function(x, type)
 }
 par(mfrow=c(4,1))
 
-plotColumn(35, "ePktAvg") #RD 05
+plotColumn(35, "ePktAvg") 
+#RD 05, Phone and carriers need a space in front of them.
+#RD 01, Phone needs space infront of it, No space for carriers. 
 
 
 
