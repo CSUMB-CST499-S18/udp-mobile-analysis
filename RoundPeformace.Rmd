@@ -33,13 +33,11 @@ Round 1, Round 05, Round 10, Round 12 Data comparisons
     #avgNewData<-round(avgNewData, digits = 0)
     return(avgNewData)
   }
-  plotRoundData = function(x1, x2, x3, x4, provider, type)
+  plotRoundData = function(x1, x2, x3, x4, provider, type, round_01_data, round_05_data, round_10_data, round_12_data)
   {
     #View(mydatafiltered)
     #Convert the errors to INF
     jitterCol="jitterCol"
-    round_12_data = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/tcpAndUdpComparison/Round12/Cumulative_Round12_Results_Final.csv", na.strings = c("NA", "N/A"))
-
     
     mydatafiltered = round_12_data[c(1:8,12,18:53)]
     names(mydatafiltered)[x1]<-jitterCol
@@ -56,7 +54,7 @@ Round 1, Round 05, Round 10, Round 12 Data comparisons
     round12<-mydat[mydat$Provider == provider,]
     round12_sorted<-round12[order(round12$jitterCol),]
     #################################################################################################
-        round_10_data = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/tcpAndUdpComparison/Cumulative_Round10_Results_Final.csv", na.strings = c("NA", "N/A"))
+       
     mydatafiltered = round_10_data[c(1:8,12,18:53)]
     names(mydatafiltered)[x2]<-jitterCol
     mydatafiltered = na.omit(mydatafiltered)
@@ -71,7 +69,7 @@ Round 1, Round 05, Round 10, Round 12 Data comparisons
     round10<-mydat[mydat$Provider == provider,]
     round10_sorted<-round10[order(round10$jitterCol),]
     ##############################################################################################
-    round_05_data = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round05_Results_Final.csv", na.strings = c("NA", "N/A"))
+   
     mydatafiltered = round_05_data[c(1:9,15:53)]
     names(mydatafiltered)[x3]<-jitterCol
     mydatafiltered = na.omit(mydatafiltered)
@@ -91,7 +89,7 @@ Round 1, Round 05, Round 10, Round 12 Data comparisons
     round05_sorted<-round05[order(round05$jitterCol),]
     
     ##############################################################################################
-    round_01_data = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round01_Results_Final.csv", na.strings = c("NA", "N/A"))
+  
     mydatafiltered = round_01_data[c(1:8,15:53)]
     names(mydatafiltered)[x4]<-jitterCol
     mydatafiltered = na.omit(mydatafiltered)
@@ -218,22 +216,26 @@ Round 1, Round 05, Round 10, Round 12 Data comparisons
   # x = column number for column to plot
   #west
   #plotRoundData(16, 16, 17, 16, "Sprint", "wRttAvg")
-  plotRoundData(22, 22, 19, 18, "Sprint", "wUDPJit")
-  plotRoundData(22, 22, 19, 18, "Verizon", "wUDPJit")
-  plotRoundData(22, 22, 19, 18, "AT&T", "wUDPJit")
-  plotRoundData(22, 22, 19, 18, "T-Mobile", "wUDPJit")
-   
+  round_01_data = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round01_Results_Final.csv", na.strings = c("NA", "N/A"))
+   round_05_data = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/jitter/Cumulative_Round05_Results_Final.csv", na.strings = c("NA", "N/A"))
+    round_10_data = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/tcpAndUdpComparison/Cumulative_Round10_Results_Final.csv", na.strings = c("NA", "N/A"))
+    round_12_data = read.csv("https://raw.githubusercontent.com/CSUMB-CST499-S18/udp-mobile-analysis/tcpAndUdpComparison/Round12/Cumulative_Round12_Results_Final.csv", na.strings = c("NA", "N/A"))
 
- 
+  plotRoundData(22, 22, 19, 18, "Sprint", "wUDPJit", round_01_data, round_05_data, round_10_data, round_12_data)
+  plotRoundData(22, 22, 19, 18, "Verizon", "wUDPJit", round_01_data, round_05_data, round_10_data, round_12_data)
+  plotRoundData(22, 22, 19, 18, "AT&T", "wUDPJit", round_01_data, round_05_data, round_10_data, round_12_data)
+  plotRoundData(22, 22, 19, 18, "T-Mobile", "wUDPJit", round_01_data, round_05_data, round_10_data, round_12_data)
 
 ```
+
+
 ## East UDP Jitter
 
 Round 1, Round 05, Round 10, Round 12 Data comparisons
 ```{r}
-  plotRoundData(31, 31, 28, 27, "Sprint", "eUDPJit")
-  plotRoundData(31, 31, 28, 27, "Verizon", "eUDPJit")
-  plotRoundData(31, 31, 28, 27, "AT&T", "eUDPJit")
-  plotRoundData(31, 31, 28, 27, "T-Mobile", "eUDPJit")
+  plotRoundData(31, 31, 28, 27, "Sprint", "eUDPJit", round_01_data, round_05_data, round_10_data, round_12_data)
+  plotRoundData(31, 31, 28, 27, "Verizon", "eUDPJit", round_01_data, round_05_data, round_10_data, round_12_data)
+  plotRoundData(31, 31, 28, 27, "AT&T", "eUDPJit", round_01_data, round_05_data, round_10_data, round_12_data)
+  plotRoundData(31, 31, 28, 27, "T-Mobile", "eUDPJit", round_01_data, round_05_data, round_10_data, round_12_data)
 ```
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
